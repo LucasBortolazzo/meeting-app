@@ -1,0 +1,63 @@
+<div class="flex">
+    <mat-form-field class="example-full-width">
+        <mat-label>Meeting name filter</mat-label>
+        <input matInput name="meetingName" [(ngModel)]="meetingNameFind">
+    </mat-form-field>
+
+    <!-- <mat-form-field class="example-full-width">
+        <mat-label>Meeting date</mat-label>
+        <input matInput [matDatepicker]="picker" [(ngModel)]="meetingDateFind">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field> -->
+
+    <button mat-raised-button color="primary" style="height: 40px;" (click)="pesquisarMeet()">Pesquisar</button>
+</div>
+
+<table mat-table [dataSource]="meetings" class="mat-elevation-z8">
+
+    <!-- Position Column -->
+    <ng-container matColumnDef="meetingName">
+        <th mat-header-cell *matHeaderCellDef> Meeting name </th>
+        <td mat-cell *matCellDef="let element"> {{element.meetingName}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="meetingSubject">
+        <th mat-header-cell *matHeaderCellDef>meeting subject</th>
+        <td mat-cell *matCellDef="let element"> {{element.meetingSubject}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="meetingResponsible">
+        <th mat-header-cell *matHeaderCellDef> Meeting responsible </th>
+        <td mat-cell *matCellDef="let element"> {{element.meetingResponsible}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="meetingDate">
+        <th mat-header-cell *matHeaderCellDef> Meeting date </th>
+        <td mat-cell *matCellDef="let element"> {{element.meetingDate | date }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="meetingTime">
+        <th mat-header-cell *matHeaderCellDef> Meeting time </th>
+        <td mat-cell *matCellDef="let element"> {{element.meetingTime}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef> Actions </th>
+        <td mat-cell *matCellDef="let element">
+            <button mat-mini-fab color="primary" (click)="editMeeting(element.id)" style="margin-right: 10px;">
+                <mat-icon>edit</mat-icon>
+            </button>
+
+            <button mat-mini-fab color="warn" (click)="deleteMeeting(element.id)">
+                <mat-icon class="example-icon">delete</mat-icon>
+            </button>
+        </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+
+<mat-paginator [length]="this.lengthMeets" [pageSize]="this.pageSize" [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page" (page)="getServerData($event)">
+</mat-paginator>

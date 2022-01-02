@@ -1,0 +1,39 @@
+<h1 mat-dialog-title>New Meeting</h1>
+
+<form class="example-form" [formGroup]="meetingForm">
+    <input type="hidden" formControlName="id" name="id">
+
+    <mat-form-field class="example-full-width">
+        <mat-label>Meeting name</mat-label>
+        <input matInput formControlName="meetingName" name="meetingName">
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+        <mat-label>Meeting subject</mat-label>
+        <input matInput formControlName="meetingSubject" name="meetingSubject">
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+        <mat-label>Meeting responsible</mat-label>
+        <input matInput formControlName="meetingResponsible" name="meetingResponsible">
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+        <mat-label>Meeting date</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="meetingDate">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+        <mat-label>Meeting time</mat-label>
+        <input matInput formControlName="meetingTime" name="meetingTime" type="time">
+    </mat-form-field>
+
+    <div mat-dialog-actions>
+        <button mat-button (click)="cancelMeeting()">Cancel</button>
+        <button mat-raised-button color="primary" (click)="saveMeeting()" [disabled]="meetingForm.invalid">
+            Save
+        </button>
+    </div>
+</form>

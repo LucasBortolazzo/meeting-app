@@ -1,0 +1,9 @@
+table {
+    width: 100%;
+  }
+
+  .flex{
+    display: flex;
+    gap: 15px;
+    align-items: center;
+  }
